@@ -10,10 +10,10 @@
     "readme",
     "cli"
   ],
-  "homepage": "https://tomatobybike.github.io/wukong-gitlog-cli/",
+  "homepage": "https://tomatobybike.github.io/md-structure/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tomatobybike/wukong-gitlog-cli"
+    "url": "git+https://github.com/tomatobybike/md-structure"
   },
   "license": "MIT",
   "author": "Tom <tomatobybike@gmail.com>",
