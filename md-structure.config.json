@@ -1,0 +1,16 @@
+{
+  "root": ".",
+  "depth": 5,
+  "format": "",
+  "only": [
+    ".mjs",
+    ".ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "test"
+  ],
+  "output": "STRUCTURE.md",
+  "insertReadme": true
+}
