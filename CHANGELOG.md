@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.4](https://github.com/tomatobybike/md-structure/compare/v1.0.3...v1.0.4) (2025-12-16)
+
+
+### Features
+
+* 🎸 change root directory from src to . as default ([245f4c9](https://github.com/tomatobybike/md-structure/commit/245f4c9488ef41a1791756fb13d6f8194b5f1963))
+
 ### [1.0.3](https://github.com/tomatobybike/md-structure/compare/v1.0.2...v1.0.3) (2025-12-16)
 
 
