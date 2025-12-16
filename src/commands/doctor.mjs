@@ -9,9 +9,12 @@ import { readConfig } from '../utils/config.mjs'
 export function runDoctor() {
   const results = []
 
+  let config = null
+
+
   // 1. Config check
   try {
-    readConfig()
+    config = readConfig()
     results.push({
       name: 'Config file',
       ok: true
@@ -25,7 +28,7 @@ export function runDoctor() {
   }
 
   // 2. Root directory
-  const root = 'src'
+  const root = config && config.root ? config.root : process.cwd()
   if (fs.existsSync(root)) {
     results.push({
       name: `Root directory (${root})`,

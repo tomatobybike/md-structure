@@ -22,6 +22,16 @@ export function generateStructure({
   only,
   exclude
 }) {
+  // ---------- root 校验（参数级错误） ----------
+  if (!fs.existsSync(root)) {
+    throw new Error(`Root directory does not exist: ${root}`)
+  }
+
+  const stat = fs.statSync(root)
+  if (!stat.isDirectory()) {
+    throw new Error(`Root path is not a directory: ${root}`)
+  }
+
   const lines = []
 
   const onlyExts = normalizeList(only)
@@ -30,11 +40,17 @@ export function generateStructure({
   function walk(dir, depth) {
     if (depth > maxDepth) return
 
-    const entries = fs
-      .readdirSync(dir, { withFileTypes: true })
-      .filter((e) => !excludeDirs.has(e.name))
+    let entries
+    try {
+      entries = fs.readdirSync(dir, { withFileTypes: true })
+    } catch {
+      // 权限不足 / IO 异常，直接跳过该目录
+      return
+    }
 
-    // 目录优先，其次文件名排序
+    entries = entries.filter((e) => !excludeDirs.has(e.name))
+
+    // 目录优先，其次按名称排序
     entries.sort((a, b) => {
       if (a.isDirectory() && !b.isDirectory()) return -1
       if (!a.isDirectory() && b.isDirectory()) return 1
@@ -42,26 +58,24 @@ export function generateStructure({
     })
 
     for (const entry of entries) {
-      const fullPath = path.join(dir, entry.name)
+      // 文件扩展名过滤
+      const shouldInclude =
+        !entry.isFile() ||
+        !onlyExts ||
+        onlyExts.some((ext) => entry.name.endsWith(ext))
 
-      // 反转条件，将 `continue` 替换为包裹剩余逻辑的 `if` 块
-      const shouldProcessEntry = !(
-        entry.isFile() &&
-        onlyExts &&
-        !onlyExts.some((ext) => entry.name.endsWith(ext))
-      )
-
-      if (shouldProcessEntry) {
+      if (shouldInclude) {
         const indent = '  '.repeat(depth)
         lines.push(`${indent}${bullet} ${entry.name}`)
 
         if (entry.isDirectory()) {
-          walk(fullPath, depth + 1)
+          walk(path.join(dir, entry.name), depth + 1)
         }
       }
     }
   }
 
+  // 根节点
   lines.push(`${bullet} ${root}`)
   walk(root, 1)
 

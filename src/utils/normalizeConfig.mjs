@@ -1,4 +1,7 @@
 import path from 'path'
+import process from 'process'
+
+const DEFAULT_ROOT = process.cwd()
 
 const DEFAULTS = {
   root: '.',
@@ -42,8 +45,9 @@ function normalizeDepth(value) {
 }
 
 export function normalizeConfig(raw = {}) {
+  const root = raw.root ? path.resolve(raw.root) : DEFAULT_ROOT
   return {
-    root: path.normalize(raw.root ?? DEFAULTS.root),
+    root,
     depth: normalizeDepth(raw.depth),
     bullet: raw.bullet ?? DEFAULTS.bullet,
 

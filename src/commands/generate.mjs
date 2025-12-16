@@ -18,40 +18,46 @@ export function runGenerate(cliOptions) {
 
   const config = normalizeConfig(rawConfig)
 
-  const result = generateStructure(config)
+  try {
+    const result = generateStructure(config)
 
-  // ---------- JSON ----------
-  if (config.json) {
+    // ---------- JSON ----------
+    if (config.json) {
+      console.log(
+        renderJsonResult({
+          root: config.root,
+          output: config.output,
+          dryRun: config.dryRun,
+          length: result.split('\n').length
+        })
+      )
+      return
+    }
+
+    // ---------- DRY RUN ----------
+    if (config.dryRun) {
+      logger.info(renderDryRun(result))
+      return
+    }
+
+    // ---------- WRITE FILE ----------
+    const outputPath = path.resolve(process.cwd(), config.output)
+
+    fs.writeFileSync(outputPath, result)
+
     console.log(
-      renderJsonResult({
-        root: config.root,
-        output: config.output,
-        dryRun: config.dryRun,
-        length: result.split('\n').length
-      })
+      chalk.green('✔ Structure written to ') + chalk.cyan(outputPath)
     )
-    return
-  }
 
-  // ---------- DRY RUN ----------
-  if (config.dryRun) {
-    logger.info(renderDryRun(result))
-    return
-  }
-
-
-  // ---------- WRITE FILE ----------
-  const outputPath = path.resolve(process.cwd(), config.output)
-
-  fs.writeFileSync(outputPath, result)
-
-  console.log(chalk.green('✔ Structure written to ') + chalk.cyan(outputPath))
-
-  if (config.insertReadme) {
-    insertIntoReadme({
-      content: result,
-      start: config.start,
-      end: config.end
-    })
+    if (config.insertReadme) {
+      insertIntoReadme({
+        content: result,
+        start: config.start,
+        end: config.end
+      })
+    }
+  } catch (err) {
+    logger.error(err.message)
+    process.exit(1)
   }
 }
