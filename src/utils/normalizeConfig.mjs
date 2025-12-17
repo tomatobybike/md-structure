@@ -52,6 +52,7 @@ export function normalizeConfig(raw = {}) {
     bullet: raw.bullet ?? DEFAULTS.bullet,
 
     clipboard: Boolean(raw.clipboard),
+    stdout: Boolean(raw.stdout),
     only: normalizeList(raw.only, null),
     exclude: normalizeList(raw.exclude, DEFAULTS.exclude),
 

@@ -10,6 +10,10 @@ import { copyToClipboard } from '../utils/clipboard.mjs'
 import { readConfig } from '../utils/config.mjs'
 import { normalizeConfig } from '../utils/normalizeConfig.mjs'
 
+/*
+stdout > dry-run > insert > write file
+*/
+
 export async function runGenerate(cliOptions) {
   configureLogger({ json: cliOptions.json })
   const rawConfig = {
@@ -19,10 +23,14 @@ export async function runGenerate(cliOptions) {
 
   const config = normalizeConfig(rawConfig)
 
-
-
   try {
     const result = generateStructure(config)
+
+    // 1️⃣ stdout 优先（最高优先级）
+    if (config.stdout) {
+      process.stdout.write(result)
+      return
+    }
 
     // ---------- JSON ----------
     if (config.json) {
@@ -42,7 +50,7 @@ export async function runGenerate(cliOptions) {
       return
     }
 
-    // ---------- DRY RUN ----------
+    // ---------- DRY RUN ：只展示----------
     if (config.dryRun) {
       if (config.clipboard) {
         await copyToClipboard(result)
@@ -53,20 +61,21 @@ export async function runGenerate(cliOptions) {
       return
     }
 
-    // ---------- WRITE FILE ----------
+    // ---------- WRITE FILE  默认：写文件 ----------
     const outputPath = path.resolve(process.cwd(), config.output)
 
     fs.writeFileSync(outputPath, result)
+
+    console.log(
+      chalk.green('✔ Structure written to ') + chalk.cyan(outputPath)
+    )
 
     if (config.clipboard) {
       await copyToClipboard(result)
       logger.success('Structure copied to clipboard')
     }
 
-    console.log(
-      chalk.green('✔ Structure written to ') + chalk.cyan(outputPath)
-    )
-
+    // ---------- INSERT README insert 模式 ----------
     if (config.insertReadme) {
       insertIntoReadme({
         content: result,
