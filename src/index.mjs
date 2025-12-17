@@ -7,6 +7,7 @@ import { bootstrapRuntime } from './ui/bootstrapRuntime.mjs'
 import { renderBanner } from './ui/render/banner.mjs'
 import { isQuietMode, setRuntime } from './ui/runtime.mjs'
 import { checkUpdate } from './utils/checkUpdate.mjs'
+import { isVersionMode } from './utils/isVersionMode.mjs'
 import { getPackage } from './utils/pkg.mjs'
 import { isInteractiveTTY } from './utils/tty.mjs'
 
@@ -20,7 +21,9 @@ bootstrapRuntime()
 
 const program = new Command()
 
-program.name(pkg.name || 'md-structure')
+program
+  .name(pkg.name || 'md-structure')
+  .version(pkg.version, '-v, --version', 'output the current version')
 
 // --help 时不显示 banner
 let shouldShowBanner = true
@@ -29,7 +32,12 @@ program.on('--help', () => {
   shouldShowBanner = false
 })
 
-if (isInteractiveTTY() && shouldShowBanner && !isQuietMode()) {
+if (
+  isInteractiveTTY() &&
+  shouldShowBanner &&
+  !isQuietMode() &&
+  !isVersionMode()
+) {
   console.log(renderBanner())
 }
 
