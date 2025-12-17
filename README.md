@@ -131,6 +131,38 @@ md-structure init
 
 ---
 
+### Extension filtering
+
+Use `--only` to include only specific file extensions:
+
+```bash
+md-structure generate --only .ts,.mjs
+```
+
+To **explicitly disable extension filtering**, use:
+
+```bash
+md-structure generate --no-only
+```
+
+This is useful when:
+
+-   A config file defines `"only"`
+
+-   You want to temporarily include all file types
+
+-   You prefer CLI overrides instead of editing config files
+
+
+#### Behavior summary
+
+| Option | Result |
+| --- | --- |
+| no `--only` | No filtering (default) |
+| `--only .ts` | Include only `.ts` files |
+| `--no-only` | Disable filtering explicitly |
+
+---
 ## 🧠 Configuration
 
 You can generate a configuration file using:
@@ -282,6 +314,141 @@ This makes `md-structure` suitable for:
 
 `md-structure` generates structure —
 **what you do with it is up to you**.
+
+---
+
+## 🩺 Doctor JSON schema
+
+The `doctor` command can output a **machine-readable JSON report** for CI, scripts, and automation tools.
+
+```bash
+md-structure doctor --json
+```
+
+### Output schema
+
+```json
+{
+  "ok": true,
+  "results": [
+    {
+      "name": "Config file",
+      "ok": true,
+      "message": "optional error message"
+    },
+    {
+      "name": "Root directory (/path/to/project)",
+      "ok": true
+    },
+    {
+      "name": "Output directory writable",
+      "ok": true
+    }
+  ]
+}
+```
+
+### Field description
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `ok` | boolean | Overall health status (all checks passed) |
+| `results` | array | Individual check results |
+| `results[].name` | string | Check name |
+| `results[].ok` | boolean | Whether the check passed |
+| `results[].message` | string *(optional)* | Failure reason |
+
+### Exit code behavior
+
+-   `0` → all checks passed
+
+-   `1` → one or more checks failed
+
+
+This makes `doctor` suitable for:
+
+-   CI pipelines
+
+-   Preflight validation
+
+-   Automation scripts
+
+
+---
+
+## 🧠 Design principles
+
+`md-structure` is intentionally **small, predictable, and composable**.
+
+### 1\. Do one thing well
+
+`md-structure` focuses on **one responsibility**:
+
+> Generate clean, readable Markdown directory structures.
+
+It does **not** try to be a file explorer, formatter, or documentation generator.
+
+---
+
+### 2\. CLI first, automation friendly
+
+-   All features are available via CLI flags
+
+-   `--json` and `--stdout` are first-class citizens
+
+-   Output is predictable and scriptable
+
+
+Designed for:
+
+-   CI
+
+-   Shell pipelines
+
+-   Editor integrations
+
+-   AI tooling
+
+
+---
+
+### 3\. Explicit over implicit
+
+-   CLI options always override config files
+
+-   Config files never silently override CLI intent
+
+-   `--no-*` flags exist to explicitly disable behavior
+
+
+No hidden magic.
+
+---
+
+### 4\. Unix philosophy
+
+> *Write programs that do one thing well, and work together.*
+
+Examples:
+
+```bash
+md-structure generate --stdout | pbcopy
+md-structure generate --stdout | sed 's/src/source/'
+```
+
+---
+
+### 5\. Stable output > clever output
+
+-   Directory-first ordering
+
+-   Deterministic sorting
+
+-   No environment-dependent formatting
+
+
+The same input always produces the same output.
+
 ---
 
 ## 📄 License
