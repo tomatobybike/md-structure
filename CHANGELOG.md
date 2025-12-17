@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.6](https://github.com/tomatobybike/md-structure/compare/v1.0.5...v1.0.6) (2025-12-17)
+
+
+### Features
+
+* 🎸 clipboard options ([db9a5c5](https://github.com/tomatobybike/md-structure/commit/db9a5c52134d52a080677f3722dbfeec7dcac01b))
+
 ### [1.0.5](https://github.com/tomatobybike/md-structure/compare/v1.0.4...v1.0.5) (2025-12-16)
 
 
