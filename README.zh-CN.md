@@ -97,6 +97,7 @@ md-structure generate [options]
 | `-b, --bullet <symbol>` | Markdown 符号      | `├──`                      |
 | `-o, --output <file>`   | 输出文件名         | `STRUCTURE.md`             |
 | `--only <exts>`         | 仅包含指定扩展名   | —                          |
+| `--no-only`             | 禁用后缀过滤，包含所有文件| —                      |
 | `--exclude <dirs>`      | 排除目录           | —                          |
 | `-i, --insert`          | 插入到 README      | `false`                    |
 | `--start <marker>`      | README 起始标记    | `<!-- STRUCTURE_START -->` |

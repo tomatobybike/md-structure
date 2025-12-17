@@ -97,6 +97,7 @@ md-structure generate [options]
 | `-b, --bullet <symbol>` | Markdown bullet symbol                  | `├──`                      |
 | `-o, --output <file>`   | Output file                             | `STRUCTURE.md`             |
 | `--only <exts>`         | Only include extensions                 | —                          |
+| `--no-only`             | Disable extension filtering (include all files) | -                  |
 | `--exclude <dirs>`      | Exclude directories                     | —                          |
 | `-i, --insert`          | Insert structure into README            | `false`                    |
 | `--start <marker>`      | README start marker                     | `<!-- STRUCTURE_START -->` |
