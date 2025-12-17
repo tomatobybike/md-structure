@@ -45,6 +45,7 @@ program
   .option('-d, --depth <number>', 'max depth', (v) => parseInt(v, 10), Infinity)
   .option('-b, --bullet <symbol>', 'markdown bullet symbol e.g -,├──,*', '├──')
   .option('-o, --output <file>', 'output file', 'STRUCTURE.md')
+  .option('--clipboard', 'copy result to clipboard')
   .option('--only <exts>', 'only include extensions, e.g. .mjs,.ts')
   .option('--exclude <dirs>', 'exclude directories, e.g. test,dist')
   .option('--insert', 'insert structure into README.md')

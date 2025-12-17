@@ -51,6 +51,7 @@ export function normalizeConfig(raw = {}) {
     depth: normalizeDepth(raw.depth),
     bullet: raw.bullet ?? DEFAULTS.bullet,
 
+    clipboard: Boolean(raw.clipboard),
     only: normalizeList(raw.only, null),
     exclude: normalizeList(raw.exclude, DEFAULTS.exclude),
 

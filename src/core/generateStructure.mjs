@@ -1,6 +1,8 @@
 import fs from 'fs'
 import path from 'path'
 
+// 纯函数（无 IO）
+
 const IGNORE = ['node_modules', '.git']
 
 function normalizeList(value, defaultValue = null) {
