@@ -4,10 +4,6 @@
 
 # md-structure
 
-Generate clean, readable Markdown directory structures.
-
-A small, focused CLI tool for turning your project folders into **well-formatted Markdown structure docs** — suitable for READMEs, documentation, code reviews, and AI context.
-
 <p align="center">
   <a href="https://www.npmjs.com/package/md-structure">
     <img src="https://img.shields.io/npm/v/md-structure.svg" alt="npm version">
@@ -25,6 +21,12 @@ A small, focused CLI tool for turning your project folders into **well-formatted
     <img src="https://img.shields.io/github/issues/tomatobybike/md-structure.svg" alt="issues">
   </a>
 </p>
+
+Generate clean, readable Markdown directory structures.
+
+A small, focused CLI tool for turning your project folders into **well-formatted Markdown structure docs** — suitable for READMEs, documentation, code reviews, and AI context.
+
+
 
 ---
 
