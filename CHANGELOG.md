@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.13](https://github.com/tomatobybike/md-structure/compare/v1.0.12...v1.0.13) (2026-04-20)
+
+
+### Features
+
+* 🎸 dirs-only params ([f2bf69e](https://github.com/tomatobybike/md-structure/commit/f2bf69e4e6c0e60e285b4fd6e0f8babcdb3dec70))
+
 ### [1.0.12](https://github.com/tomatobybike/md-structure/compare/v1.0.11...v1.0.12) (2026-04-20)
 
 
