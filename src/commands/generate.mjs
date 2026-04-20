@@ -18,6 +18,10 @@ export async function runGenerate(cliOptions) {
   configureLogger({ json: cliOptions.json })
   const rawConfig = { ...readConfig() }
   for (const [key, value] of Object.entries(cliOptions)) {
+    // 跳过 depth 为 Infinity（未明确指定时的默认值）
+    if (key === 'depth' && value === Infinity) {
+      continue
+    }
     if (value !== undefined) {
       rawConfig[key] = value
     }

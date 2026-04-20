@@ -41,7 +41,7 @@ export function generateStructure({
   const excludeDirs = new Set(normalizeList(exclude, IGNORE))
 
   function walk(dir, depth) {
-    if (depth >= maxDepth) return
+    if (depth > maxDepth) return
 
     let entries
     try {
@@ -69,10 +69,8 @@ export function generateStructure({
         onlyExts.some((ext) => entry.name.endsWith(ext)))
 
       if (shouldInclude) {
-        if (depth > 0) {
-          const indent = '  '.repeat(depth)
-          lines.push(`${indent}${bullet} ${entry.name}`)
-        }
+        const indent = '  '.repeat(depth)
+        lines.push(`${indent}${bullet} ${entry.name}`)
 
         if (entry.isDirectory()) {
           walk(path.join(dir, entry.name), depth + 1)
@@ -83,7 +81,7 @@ export function generateStructure({
 
   // 根节点
   lines.push(`${bullet} ${root}`)
-  walk(root, 0)
+  walk(root, 1)
 
   return lines.join('\n')
 }
