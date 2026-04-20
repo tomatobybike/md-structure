@@ -16,16 +16,17 @@ stdout > dry-run > insert > write file
 
 export async function runGenerate(cliOptions) {
   configureLogger({ json: cliOptions.json })
-  const rawConfig = {
-    ...readConfig(),
-    ...cliOptions
+  const rawConfig = { ...readConfig() }
+  for (const [key, value] of Object.entries(cliOptions)) {
+    if (value !== undefined) {
+      rawConfig[key] = value
+    }
   }
 
   const config = normalizeConfig(rawConfig)
 
   try {
     const result = generateStructure(config)
-
     // 1️⃣ stdout 优先（最高优先级）
     if (config.stdout) {
       process.stdout.write(result)

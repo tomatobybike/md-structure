@@ -22,7 +22,8 @@ export function generateStructure({
   depth: maxDepth,
   bullet,
   only,
-  exclude
+  exclude,
+  onlyDir
 }) {
   // ---------- root 校验（参数级错误） ----------
   if (!fs.existsSync(root)) {
@@ -40,7 +41,7 @@ export function generateStructure({
   const excludeDirs = new Set(normalizeList(exclude, IGNORE))
 
   function walk(dir, depth) {
-    if (depth > maxDepth) return
+    if (depth >= maxDepth) return
 
     let entries
     try {
@@ -62,13 +63,16 @@ export function generateStructure({
     for (const entry of entries) {
       // 文件扩展名过滤
       const shouldInclude =
-        !entry.isFile() ||
+        (!onlyDir || entry.isDirectory()) &&
+        (!entry.isFile() ||
         !onlyExts ||
-        onlyExts.some((ext) => entry.name.endsWith(ext))
+        onlyExts.some((ext) => entry.name.endsWith(ext)))
 
       if (shouldInclude) {
-        const indent = '  '.repeat(depth)
-        lines.push(`${indent}${bullet} ${entry.name}`)
+        if (depth > 0) {
+          const indent = '  '.repeat(depth)
+          lines.push(`${indent}${bullet} ${entry.name}`)
+        }
 
         if (entry.isDirectory()) {
           walk(path.join(dir, entry.name), depth + 1)
@@ -79,7 +83,7 @@ export function generateStructure({
 
   // 根节点
   lines.push(`${bullet} ${root}`)
-  walk(root, 1)
+  walk(root, 0)
 
   return lines.join('\n')
 }

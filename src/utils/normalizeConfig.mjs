@@ -14,13 +14,23 @@ const CONFIG_DEFAULTS = {
   depth: Infinity,
   bullet: '├──',
   output: 'STRUCTURE.md',
-  only: ['.mjs', '.ts', '.js', '.jsx', '.css', '.less','.md'],
+  only: ['.mjs', '.ts', '.js', '.jsx', '.css', '.less', '.md'],
   // only: null,
-  exclude: ['node_modules', '.git', '.history', '.husky'],
+  exclude: [
+    'node_modules',
+    '.git',
+    '.history',
+    '.husky',
+    '.next',
+    '.cursor',
+    '.vscode',
+    '.husky'
+  ],
   insertReadme: true,
   start: '<!-- STRUCTURE_START -->',
   end: '<!-- STRUCTURE_END -->',
-  dryRun: false
+  dryRun: false,
+  onlyDir: false
 }
 
 /**
@@ -97,6 +107,7 @@ export function normalizeConfig(raw = {}) {
     start: raw.start ?? CONFIG_DEFAULTS.start,
     end: raw.end ?? CONFIG_DEFAULTS.end,
 
-    dryRun: Boolean(raw.dryRun)
+    dryRun: Boolean(raw.dryRun),
+    onlyDir: Boolean(raw.onlyDir)
   }
 }
