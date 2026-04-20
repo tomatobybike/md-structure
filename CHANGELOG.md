@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.12](https://github.com/tomatobybike/md-structure/compare/v1.0.11...v1.0.12) (2026-04-20)
+
+
+### Bug Fixes
+
+* 🐛 depth ([89b7ef6](https://github.com/tomatobybike/md-structure/commit/89b7ef64a3c091b0322ca1fdafcf12b1d439fe8a))
+* 🐛 depth eslint continue ([0e92656](https://github.com/tomatobybike/md-structure/commit/0e92656685203b79471e9701a2a7381274783347))
+
 ### [1.0.11](https://github.com/tomatobybike/md-structure/compare/v1.0.10...v1.0.11) (2026-04-20)
 
 
