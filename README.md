@@ -26,8 +26,6 @@ Generate clean, readable Markdown directory structures.
 
 A small, focused CLI tool for turning your project folders into **well-formatted Markdown structure docs** — suitable for READMEs, documentation, code reviews, and AI context.
 
-
-
 ---
 
 ### English | [简体中文](./README.zh-CN.md)
@@ -36,18 +34,18 @@ A small, focused CLI tool for turning your project folders into **well-formatted
 
 ## ✨ Features
 
-* ✅ Cross-platform (Windows / macOS / Linux)
-* 📁 Generate clean, readable Markdown directory trees
-* 🧾 Standard Markdown list output (README & docs friendly)
-* 🎯 Directory-first sorting (folders before files)
-* 📏 Max depth limit (`--depth`)
-* 🔍 Extension filtering (`--only`)
-* 🚫 Directory exclusion (`--exclude`)
-* 🧩 Auto insert into README via markers
-* 🧪 Dry-run preview mode (`--dry-run`)
-* 🤖 Machine-readable JSON output (`--json`)
-* 🩺 Built-in `doctor` self-check command
-* ⚡ Zero runtime dependencies *(except `commander`)*
+- ✅ Cross-platform (Windows / macOS / Linux)
+- 📁 Generate clean, readable Markdown directory trees
+- 🧾 Standard Markdown list output (README & docs friendly)
+- 🎯 Directory-first sorting (folders before files)
+- 📏 Max depth limit (`--depth`)
+- 🔍 Extension filtering (`--only`)
+- 🚫 Directory exclusion (`--exclude`)
+- 🧩 Auto insert into README via markers
+- 🧪 Dry-run preview mode (`--dry-run`)
+- 🤖 Machine-readable JSON output (`--json`)
+- 🩺 Built-in `doctor` self-check command
+- ⚡ Zero runtime dependencies _(except `commander`)_
 
 ---
 
@@ -89,21 +87,69 @@ md-structure generate [options]
 
 #### Options
 
-| Option                  | Description                             | Default                    |
-| ----------------------- | --------------------------------------- | -------------------------- |
-| `--dry-run`             | Preview result without writing files    | `false`                    |
-| `-s, --stdout`          | Output result to stdout instead of file | `false`                    |
-| `-c, --clipboard`       | Copy result to clipboard                | `false`                    |
-| `-r, --root <dir>`      | Root directory to scan                  | `.`                        |
-| `-d, --depth <number>`  | Max directory depth                     | `Infinity`                 |
-| `-b, --bullet <symbol>` | Markdown bullet symbol                  | `├──`                      |
-| `-o, --output <file>`   | Output file                             | `STRUCTURE.md`             |
-| `--only <exts>`         | Only include extensions                 | —                          |
-| `--no-only`             | Disable extension filtering (include all files) | -                  |
-| `--exclude <dirs>`      | Exclude directories                     | —                          |
-| `-i, --insert`          | Insert structure into README            | `false`                    |
-| `--start <marker>`      | README start marker                     | `<!-- STRUCTURE_START -->` |
-| `--end <marker>`        | README end marker                       | `<!-- STRUCTURE_END -->`   |
+| Option                  | Description                                     | Default                    |
+| ----------------------- | ----------------------------------------------- | -------------------------- |
+| `--dry-run`             | Preview result without writing files            | `false`                    |
+| `-s, --stdout`          | Output result to stdout instead of file         | `false`                    |
+| `-c, --clipboard`       | Copy result to clipboard                        | `false`                    |
+| `-r, --root <dir>`      | Root directory to scan                          | `.`                        |
+| `-d, --depth <number>`  | Max directory depth                             | `Infinity`                 |
+| `-b, --bullet <symbol>` | Markdown bullet symbol                          | `├──`                      |
+| `-o, --output <file>`   | Output file                                     | `STRUCTURE.md`             |
+| `--only <exts>`         | Only include extensions                         | —                          |
+| `--no-only`             | Disable extension filtering (include all files) | -                          |
+| `--exclude <dirs>`      | Exclude directories                             | —                          |
+| `-i, --insert`          | Insert structure into README                    | `false`                    |
+| `--start <marker>`      | README start marker                             | `<!-- STRUCTURE_START -->
+
+
+```md
+├── D:\Develop\github\tomato\md-structure
+  ├── bin
+    ├── md-structure.mjs
+  ├── images
+  ├── scripts
+    ├── check-npm-login.mjs
+    ├── gen-structure.mjs
+  ├── src
+    ├── commands
+      ├── doctor.mjs
+      ├── generate.mjs
+      ├── init.mjs
+    ├── core
+      ├── generateStructure.mjs
+    ├── ui
+      ├── render
+        ├── aaa
+          ├── bbb
+        ├── banner.mjs
+        ├── doctor.mjs
+        ├── generate.mjs
+      ├── bootstrapRuntime.mjs
+      ├── help.mjs
+      ├── logger.mjs
+      ├── runtime.mjs
+      ├── styles.mjs
+    ├── utils
+      ├── checkUpdate.mjs
+      ├── clipboard.mjs
+      ├── config.mjs
+      ├── formatters.mjs
+      ├── isVersionMode.mjs
+      ├── normalizeConfig.mjs
+      ├── pkg.mjs
+      ├── tty.mjs
+    ├── index.mjs
+    ├── insertIntoReadme.mjs
+  ├── CHANGELOG.md
+  ├── README.md
+  ├── README.zh-CN.md
+  ├── STRUCTURE.md
+```
+
+
+<!-- STRUCTURE_END -->`   |
+| `--dirs-only`           | Only include directories                        | `false`                    |
 
 ---
 
@@ -129,8 +175,8 @@ Interactive project initialization.
 md-structure init
 ```
 
-* Guides you through creating a default configuration
-* Generates `md-structure.config.json` in the current project
+- Guides you through creating a default configuration
+- Generates `md-structure.config.json` in the current project
 
 ---
 
@@ -150,22 +196,22 @@ md-structure generate --no-only
 
 This is useful when:
 
--   A config file defines `"only"`
+- A config file defines `"only"`
 
--   You want to temporarily include all file types
+- You want to temporarily include all file types
 
--   You prefer CLI overrides instead of editing config files
-
+- You prefer CLI overrides instead of editing config files
 
 #### Behavior summary
 
-| Option | Result |
-| --- | --- |
-| no `--only` | No filtering (default) |
-| `--only .ts` | Include only `.ts` files |
-| `--no-only` | Disable filtering explicitly |
+| Option       | Result                       |
+| ------------ | ---------------------------- |
+| no `--only`  | No filtering (default)       |
+| `--only .ts` | Include only `.ts` files     |
+| `--no-only`  | Disable filtering explicitly |
 
 ---
+
 ## 🧠 Configuration
 
 You can generate a configuration file using:
@@ -212,17 +258,18 @@ md-structure generate --insert
 
 ## 📤 Stdout & JSON behavior
 
-* `--stdout` outputs only to stdout
-* No files are written in stdout mode
-* `--json` implies quiet, machine-readable output
+- `--stdout` outputs only to stdout
+- No files are written in stdout mode
+- `--json` implies quiet, machine-readable output
 
 This makes `md-structure` ideal for:
 
-* CI pipelines
-* Shell scripting
-* Editor or web integrations
+- CI pipelines
+- Shell scripting
+- Editor or web integrations
 
 ---
+
 ## 📤 Output to stdout (recommended)
 
 By default, `md-structure generate` writes the result to a file
@@ -258,21 +305,19 @@ md-structure generate --stdout --json
 
 ### Behavior notes
 
--   When using `--stdout`:
+- When using `--stdout`:
+  - ❌ No files are written
 
-    -   ❌ No files are written
+  - ❌ No README insertion is performed
 
-    -   ❌ No README insertion is performed
+  - ✅ Output is written to stdout only
 
-    -   ✅ Output is written to stdout only
+- Ideal for:
+  - CI pipelines
 
--   Ideal for:
+  - Shell scripting
 
-    -   CI pipelines
-
-    -   Shell scripting
-
-    -   Editor or Web integrations
+  - Editor or Web integrations
 
 ---
 
@@ -282,15 +327,15 @@ md-structure generate --stdout --json
 
 This design follows the **Unix philosophy**:
 
-> *Write programs that do one thing well, and work together.*
+> _Write programs that do one thing well, and work together._
 
 By supporting `--stdout`:
 
--   `md-structure` becomes composable
+- `md-structure` becomes composable
 
--   Output can be piped, transformed, copied, or stored
+- Output can be piped, transformed, copied, or stored
 
--   No assumptions are made about your workflow
+- No assumptions are made about your workflow
 
 Examples:
 
@@ -307,13 +352,13 @@ STRUCTURE=$(md-structure generate --stdout)
 
 This makes `md-structure` suitable for:
 
--   CI systems
+- CI systems
 
--   Editor extensions
+- Editor extensions
 
--   Web tools
+- Web tools
 
--   AI-assisted workflows
+- AI-assisted workflows
 
 `md-structure` generates structure —
 **what you do with it is up to you**.
@@ -353,29 +398,27 @@ md-structure doctor --json
 
 ### Field description
 
-| Field | Type | Description |
-| --- | --- | --- |
-| `ok` | boolean | Overall health status (all checks passed) |
-| `results` | array | Individual check results |
-| `results[].name` | string | Check name |
-| `results[].ok` | boolean | Whether the check passed |
-| `results[].message` | string *(optional)* | Failure reason |
+| Field               | Type                | Description                               |
+| ------------------- | ------------------- | ----------------------------------------- |
+| `ok`                | boolean             | Overall health status (all checks passed) |
+| `results`           | array               | Individual check results                  |
+| `results[].name`    | string              | Check name                                |
+| `results[].ok`      | boolean             | Whether the check passed                  |
+| `results[].message` | string _(optional)_ | Failure reason                            |
 
 ### Exit code behavior
 
--   `0` → all checks passed
+- `0` → all checks passed
 
--   `1` → one or more checks failed
-
+- `1` → one or more checks failed
 
 This makes `doctor` suitable for:
 
--   CI pipelines
+- CI pipelines
 
--   Preflight validation
+- Preflight validation
 
--   Automation scripts
-
+- Automation scripts
 
 ---
 
@@ -395,34 +438,31 @@ It does **not** try to be a file explorer, formatter, or documentation generator
 
 ### 2\. CLI first, automation friendly
 
--   All features are available via CLI flags
+- All features are available via CLI flags
 
--   `--json` and `--stdout` are first-class citizens
+- `--json` and `--stdout` are first-class citizens
 
--   Output is predictable and scriptable
-
+- Output is predictable and scriptable
 
 Designed for:
 
--   CI
+- CI
 
--   Shell pipelines
+- Shell pipelines
 
--   Editor integrations
+- Editor integrations
 
--   AI tooling
-
+- AI tooling
 
 ---
 
 ### 3\. Explicit over implicit
 
--   CLI options always override config files
+- CLI options always override config files
 
--   Config files never silently override CLI intent
+- Config files never silently override CLI intent
 
--   `--no-*` flags exist to explicitly disable behavior
-
+- `--no-*` flags exist to explicitly disable behavior
 
 No hidden magic.
 
@@ -430,7 +470,7 @@ No hidden magic.
 
 ### 4\. Unix philosophy
 
-> *Write programs that do one thing well, and work together.*
+> _Write programs that do one thing well, and work together._
 
 Examples:
 
@@ -443,12 +483,11 @@ md-structure generate --stdout | sed 's/src/source/'
 
 ### 5\. Stable output > clever output
 
--   Directory-first ordering
+- Directory-first ordering
 
--   Deterministic sorting
+- Deterministic sorting
 
--   No environment-dependent formatting
-
+- No environment-dependent formatting
 
 The same input always produces the same output.
 

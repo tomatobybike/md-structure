@@ -61,6 +61,7 @@ program
   .option('-i,--insert', 'insert structure into README.md')
   .option('--start <marker>', 'README start marker', '<!-- STRUCTURE_START -->')
   .option('--end <marker>', 'README end marker', '<!-- STRUCTURE_END -->')
+  .option('--dirs-only', 'only include directories')
   .action(runGenerate)
 
 program

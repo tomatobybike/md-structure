@@ -23,7 +23,7 @@ export function generateStructure({
   bullet,
   only,
   exclude,
-  onlyDir
+  dirsOnly
 }) {
   // ---------- root 校验（参数级错误） ----------
   if (!fs.existsSync(root)) {
@@ -63,7 +63,7 @@ export function generateStructure({
     for (const entry of entries) {
       // 文件扩展名过滤
       const shouldInclude =
-        (!onlyDir || entry.isDirectory()) &&
+        (!dirsOnly || entry.isDirectory()) &&
         (!entry.isFile() ||
         !onlyExts ||
         onlyExts.some((ext) => entry.name.endsWith(ext)))

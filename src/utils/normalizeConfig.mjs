@@ -30,7 +30,7 @@ const CONFIG_DEFAULTS = {
   start: '<!-- STRUCTURE_START -->',
   end: '<!-- STRUCTURE_END -->',
   dryRun: false,
-  onlyDir: false
+  dirsOnly: false
 }
 
 /**
@@ -46,7 +46,8 @@ export function getInitDefaults() {
     only: CONFIG_DEFAULTS.only?.join(',') ?? '',
     exclude: CONFIG_DEFAULTS.exclude.join(','),
     output: CONFIG_DEFAULTS.output,
-    insertReadme: CONFIG_DEFAULTS.insertReadme
+    insertReadme: CONFIG_DEFAULTS.insertReadme,
+    dirsOnly: CONFIG_DEFAULTS.dirsOnly
   }
 }
 
@@ -108,6 +109,8 @@ export function normalizeConfig(raw = {}) {
     end: raw.end ?? CONFIG_DEFAULTS.end,
 
     dryRun: Boolean(raw.dryRun),
-    onlyDir: Boolean(raw.onlyDir)
+    // 使用 Boolean() 强制转换，确保即使是从 JSON 读入的 null/undefined 也能正确处理
+    // 同时也支持 raw.dirsOnly (来自 CLI 自动转换)
+    dirsOnly: Boolean(raw.dirsOnly ?? CONFIG_DEFAULTS.dirsOnly)
   }
 }

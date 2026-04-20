@@ -102,6 +102,7 @@ md-structure generate [options]
 | `-i, --insert`          | 插入到 README      | `false`                    |
 | `--start <marker>`      | README 起始标记    | `<!-- STRUCTURE_START -->` |
 | `--end <marker>`        | README 结束标记    | `<!-- STRUCTURE_END -->`   |
+| `--dirs-only`           | 仅文件夹 | `false`                    |
 
 ---
 
@@ -183,7 +184,8 @@ md-structure init
   "output": "STRUCTURE.md",
   "insert": true,
   "start": "<!-- STRUCTURE_START -->",
-  "end": "<!-- STRUCTURE_END -->"
+  "end": "<!-- STRUCTURE_END -->",
+  "onlyDir": false
 }
 ```
 

@@ -86,6 +86,11 @@ Markdown directory structures for documentation.
     default: defaults.insertReadme
   })
 
+  const dirsOnly = await confirm({
+    message: ui.info('Only include directories?'),
+    default: defaults.dirsOnly
+  })
+
   const config = {
     root: path.normalize(root),
     depth,
@@ -93,7 +98,8 @@ Markdown directory structures for documentation.
     only,
     exclude,
     output,
-    insertReadme
+    insertReadme,
+    dirsOnly
   }
 
   const filePath = writeConfig(config)
