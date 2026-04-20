@@ -20,6 +20,7 @@ export async function runGenerate(cliOptions) {
   for (const [key, value] of Object.entries(cliOptions)) {
     // 跳过 depth 为 Infinity（未明确指定时的默认值）
     if (key === 'depth' && value === Infinity) {
+      // eslint-disable-next-line no-continue
       continue
     }
     if (value !== undefined) {
